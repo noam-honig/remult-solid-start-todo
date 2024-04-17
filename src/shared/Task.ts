@@ -1,18 +1,15 @@
-import { Entity, Fields } from "remult"
+import { Entity, Fields, describeClass } from "remult"
 
-@Entity("tasks", {
-  allowApiCrud: true,
-})
 export class Task {
-  @Fields.cuid()
   id = ""
-
-  @Fields.string()
   title = ""
-
-  @Fields.boolean()
   completed = false
-
-  @Fields.createdAt()
   createdAt?: Date
 }
+
+describeClass(Task, Entity("tasks", { allowApiCrud: true }), {
+  id: Fields.cuid(),
+  title: Fields.string(),
+  completed: Fields.boolean(),
+  createdAt: Fields.createdAt(),
+})
