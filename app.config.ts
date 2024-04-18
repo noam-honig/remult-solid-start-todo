@@ -4,7 +4,7 @@ export default defineConfig({
   //@ts-ignore
   solid: {
     babel: {
-      plugins: [["@babel/plugin-proposal-decorators", { version: "2023-11" }]],
+      plugins: [["@babel/plugin-proposal-decorators", { version: "legacy" }]],
     },
   },
 })

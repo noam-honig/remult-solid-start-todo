@@ -1,18 +1,16 @@
-import { Entity, Fields, Validators, describeClass } from "remult"
+import { Allow, Entity, Fields, Validators, describeClass } from "remult"
 
+@Entity("tasks", { allowApiCrud: true })
 export class Task {
+  @Fields.cuid()
   id = ""
-  title = ""
-  completed = false
-  createdAt?: Date
-}
-
-describeClass(Task, Entity("tasks", { allowApiCrud: true }), {
-  id: Fields.cuid(),
-  title: Fields.string<Task>({
+  @Fields.string<Task>({
     validate: (task) =>
       task.title.length > 2 || "Title must be at least 3 characters",
-  }),
-  completed: Fields.boolean(),
-  createdAt: Fields.createdAt(),
-})
+  })
+  title = ""
+  @Fields.boolean()
+  completed = false
+  @Fields.createdAt()
+  createdAt?: Date
+}
