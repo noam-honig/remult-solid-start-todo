@@ -1,4 +1,4 @@
-import { Entity, Fields, describeClass } from "remult"
+import { Entity, Fields, Validators, describeClass } from "remult"
 
 export class Task {
   id = ""
@@ -9,7 +9,10 @@ export class Task {
 
 describeClass(Task, Entity("tasks", { allowApiCrud: true }), {
   id: Fields.cuid(),
-  title: Fields.string(),
+  title: Fields.string<Task>({
+    validate: (task) =>
+      task.title.length > 2 || "Title must be at least 3 characters",
+  }),
   completed: Fields.boolean(),
   createdAt: Fields.createdAt(),
 })
